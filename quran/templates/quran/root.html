@@ -1,1 +1,6 @@
 {{ root.letters }}
+<hr>
+{% for word in words %}
+<a href="/quran/word/{{ word.pk }}/">{{ word }}</a>
+<br>
+{% endfor %}
