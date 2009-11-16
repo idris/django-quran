@@ -5,19 +5,13 @@ unittest). These will both pass when you run "manage.py test".
 Replace these with more appropriate tests for your application.
 """
 
+import doctest
+from quran import buckwalter
 from django.test import TestCase
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class BuckwalterTest(TestCase):
+    def test_buckwalter(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Test the buckwalter.py library.
         """
-        self.failUnlessEqual(1 + 1, 2)
-
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
-
->>> 1 + 1 == 2
-True
-"""}
-
+        doctest.testmod(buckwalter)
