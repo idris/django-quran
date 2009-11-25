@@ -1,5 +1,8 @@
 from django.db import models
 
+from quran.buckwalter import *
+
+
 class Sura(models.Model):
     """Sura (chapter) of the Quran"""
 
@@ -20,6 +23,9 @@ class Sura(models.Model):
     class Meta:
         ordering = ['number']
 
+    def __str__(self):
+        return unicode_to_buckwalter(self.tname)
+
     def __unicode__(self):
         return self.name
 
@@ -34,6 +40,12 @@ class Aya(models.Model):
     class Meta:
         unique_together = (('number', 'sura'))
         ordering = ['number']
+
+    def __str__(self):
+        return unicode_to_buckwalter(self.text)
+
+    def __unicode__(self):
+        return self.text
 
 
 class QuranTranslation(models.Model):
@@ -62,21 +74,42 @@ class Root(models.Model):
 
     letters = models.CharField(max_length=10, unique=True, db_index=True) # to my knowledge, there is no root with more than 7 letters
 
+    def __str__(self):
+        return unicode_to_buckwalter(self.letters)
+
     def __unicode__(self):
         return self.letters
 
 
+class DistinctWord(models.Model):
+    """Distinct Arabic word in the Quran"""
+    token = models.CharField(max_length=50, unique=True, db_index=True)
+    root = models.ForeignKey(Root, null=True, related_name='words', db_index=True)
+
+    class Meta:
+        ordering = ['token']
+
+    def __str__(self):
+        return unicode_to_buckwalter(self.token)
+
+    def __unicode__(self):
+        return self.token
+
 class Word(models.Model):
     """Arabic word in the Quran"""
 
-    aya = models.ForeignKey(Aya, db_index=True)
+    aya = models.ForeignKey(Aya, related_name='words', db_index=True)
     number = models.IntegerField()
     token = models.CharField(max_length=50, db_index=True)
-    root = models.ForeignKey(Root, null=True, db_index=True)
+    root = models.ForeignKey(Root, null=True, related_name='all_words', db_index=True)
+    distinct = models.ForeignKey(DistinctWord, db_index=True)
 
     class Meta:
         unique_together = (('aya', 'number'))
         ordering = ['number']
+
+    def __str__(self):
+        return unicode_to_buckwalter(self.token)
 
     def __unicode__(self):
         return self.token
