@@ -71,6 +71,32 @@ def import_translations():
     import_translation_txt(path_to('zekr/pickthall.txt'), translation)
 
 
+def extract_lem(morphology):
+    p = re.compile('LEM:(?P<lem>[^ "]+)')
+    m = p.search(morphology)
+    r = None
+    word = None
+    if(m):
+        r = buckwalter_to_unicode(m.group('lem'))
+    return r
+
+
+def extract_root(morphology):
+    p = re.compile('ROOT:(?P<root>[^ "]+)')
+    m = p.search(morphology)
+    r = None
+    root = None
+    if m:
+        r = buckwalter_to_unicode(m.group('root'))
+    if r:
+        try:
+            root = Root.objects.get(letters=r)
+        except Root.DoesNotExist:
+            root = Root(letters=r)
+            root.save()
+    return root
+
+
 def import_morphology():
     d = parse(path_to('corpus/quranic-corpus-morphology-0.1.xml'))
     suras = d.getElementsByTagName('chapter')
@@ -86,22 +112,67 @@ def import_morphology():
                 number = int(w.getAttribute('number'))
                 token = w.getAttribute('token')
                 morphology = w.getAttribute('morphology')
-                p = re.compile('ROOT:(?P<root>[^ "]+)')
-                m = p.search(morphology)
-                r = ''
-                word = None
-                if(m):
-                    r = m.group('root')
-                if(len(r) > 0):
-                    r = buckwalter_to_unicode(r)
-                    try:
-                        root = Root.objects.get(letters=r)
-                    except Root.DoesNotExist:
-                        root = Root(letters=r)
-                        root.save()
-                    word = Word(aya=aya, number=number, token=token, root=root)
-                else:
-                    word = Word(aya=aya, number=number, token=token)
+
+                distinct_word = None
+                dtoken = token
+                root = extract_root(morphology)
+                lem = extract_lem(morphology)
+                if lem: dtoken = lem
+
+                try:
+                    distinct_word = DistinctWord.objects.get(token=dtoken)
+                except DistinctWord.DoesNotExist:
+                    distinct_word = DistinctWord(token=dtoken, root=root)
+                    distinct_word.save()
+
+                word = Word(aya=aya, number=number, token=token, root=root, distinct=distinct_word)
                 word.save()
 
-            print "%d:%d" % (sura.number, aya.number)
+            print "[morphology] %d:%d" % (sura.number, aya.number)
+
+
+def test_data(verbosity):
+    verbosity = int(verbosity)
+    print verbosity
+    test_suite = unittest.TestLoader().loadTestsFromTestCase(DataIntegrityTestCase)
+    unittest.TextTestRunner(verbosity=verbosity).run(test_suite)
+
+
+class DataIntegrityTestCase(unittest.TestCase):
+    def test_first_ayas(self):
+        """
+        Test the first aya of Fatiha
+        """
+        sura_number = 1
+        aya_number = 1
+        word_number = 3
+        sura = Sura.objects.get(number=sura_number)
+        aya = sura.ayas.get(number=aya_number)
+        word = aya.words.get(number=word_number)
+        arrahman = buckwalter_to_unicode(u'{lr~aHoma`ni')
+        self.assertEquals(word.token, arrahman)
+
+    def test_last_ayas(self):
+        """
+        Test the last aya of Fatiha
+        """
+        sura_number = 1
+        aya_number = 7
+        word_number = 2
+        sura = Sura.objects.get(number=sura_number)
+        aya = sura.ayas.get(number=aya_number)
+        word = aya.words.get(number=word_number)
+        alatheena = buckwalter_to_unicode(u'{l~a*iyna')
+        self.assertEquals(word.token, alatheena)
+
+    def test_yusuf_ali(self):
+        """
+        Test some ayas against Yusuf Ali
+        """
+        sura_number = 112
+        aya_number = 4
+        sura = Sura.objects.get(number=sura_number)
+        aya = sura.ayas.get(number=aya_number)
+        translation = QuranTranslation.objects.get(name='Yusuf Ali')
+        t = aya.translations.get(translation=translation)
+        self.assertEquals(t.text, 'And there is none like unto Him.')

@@ -6,6 +6,6 @@ urlpatterns = patterns('quran.views',
     (r'^(?P<sura_number>\d+)/(?P<aya_number>\d+)/$', 'aya'),
     (r'^(?P<sura_number>\d+)/(?P<aya_number>\d+)/(?P<word_number>\d+)/$', 'word'),
 
-    (r'^word/(?P<word_id>\d+)/$', 'unique_word'),
+    (r'^word/(?P<distinct_word_id>\d+)/$', 'distinct_word'),
     (r'^root/(?P<root_id>\d+)/$', 'root'),
 )

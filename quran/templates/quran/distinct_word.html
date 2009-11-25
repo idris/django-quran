@@ -1,0 +1,9 @@
+{{ word }}
+<hr>
+Root: <a href="/quran/root/{{ root.pk }}/">{{ root }}</a>
+<hr>
+<ul>
+    {% for w in words %}
+    <li><a href="/quran/{{ w.aya.sura_id }}/{{ w.aya.number }}/{{ w.number }}/">{{ w }}</a></li>
+    {% endfor %}
+</ul>

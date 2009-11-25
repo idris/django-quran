@@ -72,10 +72,6 @@ for (u, bw) in _unicode_to_buckwalter.iteritems():
     _buckwalter_to_unicode[bw] = u;
 
 
-# _unicode = u"\u0621\u0622\u0623\u0624\u0625\u0626\u0627\u0628\u0629\u062A\u062B\u062C\u062D\u062E\u062F\u0630\u0631\u0632\u0633\u0634\u0635\u0636\u0637\u0638\u0639\u063A\u0640\u0641\u0642\u0643\u0644\u0645\u0646\u0647\u0648\u0649\u064A\u064B\u064C\u064D\u064E\u064F\u0650\u0651\u0652\u0653\u0654\u0670\u0671\u067E\u0686\u06A4\u06AF\u06DC\u06DF\u06E0\u06E2\u06E2\u06E2\u06E2\u06E2\u06EA\u06EB\u06EC\u06ED"
-# _buckwalter = 'NFKC', u"'>|&<}AbptvjHxd*rzs$SDTZEg_fqklmnhwYyFNKaui~o^#`{PJVG:@\"[;,.!-+%]"
-
-
 def buckwalter_to_unicode(str):
     """
     >>> buckwalter_to_unicode('yaHoyaY`')

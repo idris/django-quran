@@ -34,12 +34,12 @@ class Aya(models.Model):
     """Aya (verse) of the Quran"""
 
     number = models.IntegerField(verbose_name='Aya Number')
-    sura = models.ForeignKey(Sura, db_index=True)
-    text = models.TextField()
+    sura = models.ForeignKey(Sura, related_name='ayas', db_index=True)
+    text = models.TextField(blank=False)
 
     class Meta:
         unique_together = (('number', 'sura'))
-        ordering = ['number']
+        ordering = ['sura', 'number']
 
     def __str__(self):
         return unicode_to_buckwalter(self.text)
