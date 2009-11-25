@@ -1,15 +1,20 @@
 import re
+import unittest
 from os import path
 from xml.dom.minidom import parse, parseString
+from django.db import transaction
 
 from quran.models import *
 from quran.buckwalter import *
 
 
+def path_to(fn):
+    return path.join(path.dirname(__file__), fn)
+
+@transaction.commit_on_success
 def import_quran():
-    currpath = path.dirname(__file__)
-    d = parse(path.join(currpath, 'tanzil/quran-data.xml'))
-    d2 = parse(path.join(currpath, 'tanzil/quran-uthmani.xml'))
+    d = parse(path_to('tanzil/quran-data.xml'))
+    d2 = parse(path_to('tanzil/quran-uthmani.xml'))
     suras = d.getElementsByTagName('sura')
     for s in suras:
         index = int(s.getAttribute('index'))
@@ -37,9 +42,37 @@ def import_quran():
             print "%d:%d" % (sura_model.number, index)
 
 
+@transaction.commit_on_success
+def import_translation_txt(path, translation):
+    print "Importing %s translation" % (translation.name)
+    f = open(path)
+    ayas = Aya.objects.all()
+    for aya in ayas:
+        line = f.readline()
+        if len(line) <= 1:
+            raise Exception('Translation file [%s] ended preemtively on aya %d:%d' % (path, aya.sura_id, aya.number))
+        line = line.strip()
+        t = TranslatedAya(aya=aya, translation=translation, text=line)
+        t.save()
+        print "[%s] %d:%d" % (translation.name, aya.sura_id, aya.number)
+
+
+def import_translations():
+    translation = QuranTranslation(name='Yusuf Ali', translator='Abdullah Yusuf Ali', source_name='Zekr.org', source_url='http://zekr.org/resources.html')
+    translation.save()
+    import_translation_txt(path_to('zekr/yusufali.txt'), translation)
+
+    translation = QuranTranslation(name='Shakir', translator='Mohammad Habib Shakir', source_name='Zekr.org', source_url='http://zekr.org/resources.html')
+    translation.save()
+    import_translation_txt(path_to('zekr/shakir.txt'), translation)
+
+    translation = QuranTranslation(name='Pickthall', translator='Mohammed Marmaduke William Pickthall', source_name='Zekr.org', source_url='http://zekr.org/resources.html')
+    translation.save()
+    import_translation_txt(path_to('zekr/pickthall.txt'), translation)
+
+
 def import_morphology():
-    currpath = path.dirname(__file__)
-    d = parse(path.join(currpath, 'corpus/quranic-corpus-morphology-0.1.xml'))
+    d = parse(path_to('corpus/quranic-corpus-morphology-0.1.xml'))
     suras = d.getElementsByTagName('chapter')
     for s in suras:
         sura_number = int(s.getAttribute('number'))

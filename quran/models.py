@@ -35,6 +35,24 @@ class Aya(models.Model):
         unique_together = (('number', 'sura'))
         ordering = ['number']
 
+
+class QuranTranslation(models.Model):
+    """Metadata relating to a translation of the Quran"""
+    name = models.CharField(blank=False, max_length=50)
+    translator = models.CharField(blank=False, max_length=50)
+    source_name = models.CharField(blank=False, max_length=50)
+    source_url = models.URLField(blank=False)
+
+    def __unicode__(self):
+        return self.name
+
+
+class TranslatedAya(models.Model):
+    """Translation of an aya"""
+    aya = models.ForeignKey(Aya, related_name='translations', db_index=True)
+    translation = models.ForeignKey(QuranTranslation, db_index=True)
+    text = models.TextField(blank=False)
+
     def __unicode__(self):
         return self.text
 
