@@ -64,6 +64,7 @@ u"\u06EA": "-", # EmptyCentreLowStop (extended)
 u"\u06EB": "+", # EmptyCentreHighStop (extended)
 u"\u06EC": "%", # RoundedHighStopWithFilledCentre (extended)
 u"\u06ED": "]", # SmallLowMeem (extended)
+u" ": " ",
 }
 
 _buckwalter_to_unicode = {}
