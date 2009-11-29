@@ -24,7 +24,7 @@ class Sura(models.Model):
         ordering = ['number']
 
     def __str__(self):
-        return unicode_to_buckwalter(self.tname)
+        return self.tname
 
     def __unicode__(self):
         return self.name
