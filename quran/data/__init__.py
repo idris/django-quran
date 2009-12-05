@@ -52,7 +52,7 @@ def import_translation_txt(path, translation):
         if len(line) <= 1:
             raise Exception('Translation file [%s] ended preemtively on aya %d:%d' % (path, aya.sura_id, aya.number))
         line = line.strip()
-        t = TranslatedAya(aya=aya, translation=translation, text=line)
+        t = TranslatedAya(sura=aya.sura, aya=aya, translation=translation, text=line)
         t.save()
         print "[%s] %d:%d" % (translation.name, aya.sura_id, aya.number)
 
@@ -97,7 +97,7 @@ def extract_root(morphology):
     return root
 
 
-def import_morphology():
+def import_morphology_xml():
     d = parse(path_to('corpus/quranic-corpus-morphology-0.1.xml'))
     suras = d.getElementsByTagName('chapter')
     for s in suras:
@@ -131,6 +131,52 @@ def import_morphology():
             print "[morphology] %d:%d" % (sura.number, aya.number)
 
 
+def import_morphology_txt():
+    sura = Sura.objects.get(number=2)
+    aya = Aya.objects.get(sura=sura, number=2) # any aya except the first.
+    f = open(path_to('corpus/quranic-corpus-morphology-0.1.1.txt'))
+
+    line = f.readline()
+    while len(line) > 0:
+        parts = line.strip().split('|')
+        sura_number = 0
+        try:
+            sura_number = int(parts[0])
+        except ValueError:
+            line = f.readline()
+            continue
+        aya_number = int(parts[1])
+        word_number = int(parts[2])
+        token = parts[3]
+        morphology = parts[4]
+
+        if aya_number is not aya.number or sura_number is not sura.number:
+            sura = Sura.objects.get(number=sura_number)
+            aya = Aya.objects.get(sura=sura, number=aya_number)
+            print "[morphology] %d:%d" % (sura.number, aya.number)
+
+        distinct_word = None
+        dtoken = token
+        root = extract_root(morphology)
+        lem = extract_lem(morphology)
+        if lem: dtoken = lem
+
+        try:
+            distinct_word = DistinctWord.objects.get(token=dtoken)
+        except DistinctWord.DoesNotExist:
+            distinct_word = DistinctWord(token=dtoken, root=root)
+            distinct_word.save()
+
+        word = Word(aya=aya, number=word_number, token=token, root=root, distinct=distinct_word)
+        word.save()
+
+        line = f.readline()
+
+
+def import_morphology():
+    return import_morphology_txt()
+
+
 def test_data(verbosity):
     verbosity = int(verbosity)
     print verbosity
@@ -139,31 +185,27 @@ def test_data(verbosity):
 
 
 class DataIntegrityTestCase(unittest.TestCase):
-    def test_first_ayas(self):
-        """
-        Test the first aya of Fatiha
-        """
-        sura_number = 1
-        aya_number = 1
-        word_number = 3
+    def check_word(self, sura_number, aya_number, word_number, expected_word):
         sura = Sura.objects.get(number=sura_number)
         aya = sura.ayas.get(number=aya_number)
         word = aya.words.get(number=word_number)
-        arrahman = buckwalter_to_unicode(u'{lr~aHoma`ni')
-        self.assertEquals(word.token, arrahman)
+        self.assertEquals(word.token, buckwalter_to_unicode(expected_word))
+
+    def test_first_ayas(self):
+        """
+        Test the first ayas of some suras
+        """
+        self.check_word(1, 1, 3, u'{lr~aHoma`ni')
+        self.check_word(2, 1, 1, u'Al^m^')
+        self.check_word(114, 1, 1, u'qulo')
 
     def test_last_ayas(self):
         """
-        Test the last aya of Fatiha
+        Test the last ayas of some suras
         """
-        sura_number = 1
-        aya_number = 7
-        word_number = 2
-        sura = Sura.objects.get(number=sura_number)
-        aya = sura.ayas.get(number=aya_number)
-        word = aya.words.get(number=word_number)
-        alatheena = buckwalter_to_unicode(u'{l~a*iyna')
-        self.assertEquals(word.token, alatheena)
+        self.check_word(1, 7, 2, u'{l~a*iyna')
+        self.check_word(2, 286, 49, u'{loka`firiyna')
+        self.check_word(114, 6, 3, u'wa{ln~aAsi')
 
     def test_yusuf_ali(self):
         """

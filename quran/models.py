@@ -61,9 +61,14 @@ class QuranTranslation(models.Model):
 
 class TranslatedAya(models.Model):
     """Translation of an aya"""
+    sura = models.ForeignKey(Sura, related_name='translations', db_index=True)
     aya = models.ForeignKey(Aya, related_name='translations', db_index=True)
     translation = models.ForeignKey(QuranTranslation, db_index=True)
     text = models.TextField(blank=False)
+
+    class Meta:
+        unique_together = (('aya', 'translation'))
+        ordering = ['aya']
 
     def __unicode__(self):
         return self.text
