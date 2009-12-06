@@ -1,0 +1,38 @@
+<html><head><title>Epydoc Redirect Page</title>
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+<!--
+var pages = ["quran.management.commands.quran_loaddata.Command-c", "quran.management.commands.quran_loaddata-m", "quran.data.DataIntegrityTestCase-c", "quran.models.TranslatedAya.Meta-c", "quran.models.DistinctWord.Meta-c", "quran.models.QuranTranslation-c", "quran.models.TranslatedAya-c", "quran.tests.BuckwalterTest-c", "quran.management.commands-m", "exceptions.AssertionError-c", "quran.models.DistinctWord-c", "quran.models.Sura.Meta-c", "quran.models.Word.Meta-c", "quran.models.Aya.Meta-c", "quran.models.Root-c", "quran.models.Sura-c", "quran.models.Word-c", "quran.buckwalter-m", "quran.management-m", "quran.models.Aya-c", "quran.models-m", "quran.tests-m", "quran.views-m", "quran.data-m", "quran.urls-m", "re.Scanner-c", "quran-m", "re-m"];
+var dottedName = get_anchor();
+if (dottedName) {
+    var target = redirect_url(dottedName);
+    if (target) window.location.replace(target);
+}
+// -->
+</script>
+
+<h3>Epydoc Auto-redirect page</h3>
+
+<p>When javascript is enabled, this page will redirect URLs of
+the form <tt>redirect.html#<i>dotted.name</i></tt> to the
+documentation for the object with the given fully-qualified
+dotted name.</p>
+<p><a id="message"> &nbsp; </a></p>
+
+<script type="text/javascript">
+<!--
+if (dottedName) {
+    var msg = document.getElementById("message");
+    msg.innerHTML = "No documentation found for <tt>"+
+                    dottedName+"</tt>";
+}
+// -->
+</script>
+
+</body>
+</html>

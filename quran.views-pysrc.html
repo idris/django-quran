@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>quran.views</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="quran-module.html">Package&nbsp;quran</a> ::
+        Module&nbsp;views
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="quran.views-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="quran.views-module.html">Module quran.views</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">shortcuts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">,</tt> <tt class="py-name">render_to_response</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package quran=quran-module.html"><a title="quran" class="py-name" href="#" onclick="return doclink('link-0', 'quran', 'link-0');">quran</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module quran.models=quran.models-module.html"><a title="quran.models" class="py-name" href="#" onclick="return doclink('link-1', 'models', 'link-1');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="index"></a><div id="index-def"><a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="index-toggle" onclick="return toggle('index');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="quran.views-module.html#index">index</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">template_name</tt><tt class="py-op">=</tt><tt class="py-string">'quran/index.html'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="index-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="index-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">    <tt class="py-name">suras</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name" targets="Class quran.models.Sura=quran.models.Sura-class.html"><a title="quran.models.Sura" class="py-name" href="#" onclick="return doclink('link-2', 'Sura', 'link-2');">Sura</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-name">template_name</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'suras'</tt><tt class="py-op">:</tt> <tt class="py-name">suras</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="sura"></a><div id="sura-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="sura-toggle" onclick="return toggle('sura');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="quran.views-module.html#sura">sura</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">sura_number</tt><tt class="py-op">,</tt> <tt class="py-param">template_name</tt><tt class="py-op">=</tt><tt class="py-string">'quran/sura.html'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="sura-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="sura-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt id="link-3" class="py-name" targets="Variable quran.models.Aya.sura=quran.models.Aya-class.html#sura,Variable quran.models.TranslatedAya.sura=quran.models.TranslatedAya-class.html#sura,Variable quran.models.Word.sura=quran.models.Word-class.html#sura,Function quran.views.sura()=quran.views-module.html#sura"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-3', 'sura', 'link-3');">sura</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="quran.models.Sura" class="py-name" href="#" onclick="return doclink('link-4', 'Sura', 'link-2');">Sura</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Variable quran.models.Aya.number=quran.models.Aya-class.html#number,Variable quran.models.Sura.number=quran.models.Sura-class.html#number,Variable quran.models.Word.number=quran.models.Word-class.html#number"><a title="quran.models.Aya.number
+quran.models.Sura.number
+quran.models.Word.number" class="py-name" href="#" onclick="return doclink('link-5', 'number', 'link-5');">number</a></tt><tt class="py-op">=</tt><tt class="py-name">sura_number</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt id="link-6" class="py-name" targets="Variable quran.models.DistinctWord.ayas=quran.models.DistinctWord-class.html#ayas,Variable quran.models.Root.ayas=quran.models.Root-class.html#ayas"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-6', 'ayas', 'link-6');">ayas</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-7', 'sura', 'link-3');">sura</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-8', 'ayas', 'link-6');">ayas</a></tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt id="link-9" class="py-name"><a title="quran.models.Sura" class="py-name" href="#" onclick="return doclink('link-9', 'Sura', 'link-2');">Sura</a></tt><tt class="py-op">.</tt><tt class="py-name">DoesNotExist</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Http404</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-name">template_name</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'sura'</tt><tt class="py-op">:</tt> <tt id="link-10" class="py-name"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-10', 'sura', 'link-3');">sura</a></tt><tt class="py-op">,</tt> <tt class="py-string">'ayas'</tt><tt class="py-op">:</tt> <tt id="link-11" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-11', 'ayas', 'link-6');">ayas</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="aya"></a><div id="aya-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="aya-toggle" onclick="return toggle('aya');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="quran.views-module.html#aya">aya</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">sura_number</tt><tt class="py-op">,</tt> <tt class="py-param">aya_number</tt><tt class="py-op">,</tt> <tt class="py-param">template_name</tt><tt class="py-op">=</tt><tt class="py-string">'quran/aya.html'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="aya-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="aya-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt id="link-12" class="py-name"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-12', 'sura', 'link-3');">sura</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="quran.models.Sura" class="py-name" href="#" onclick="return doclink('link-13', 'Sura', 'link-2');">Sura</a></tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="quran.models.Aya.number
+quran.models.Sura.number
+quran.models.Word.number" class="py-name" href="#" onclick="return doclink('link-14', 'number', 'link-5');">number</a></tt><tt class="py-op">=</tt><tt class="py-name">sura_number</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt id="link-15" class="py-name" targets="Variable quran.models.TranslatedAya.aya=quran.models.TranslatedAya-class.html#aya,Variable quran.models.Word.aya=quran.models.Word-class.html#aya,Function quran.views.aya()=quran.views-module.html#aya"><a title="quran.models.TranslatedAya.aya
+quran.models.Word.aya
+quran.views.aya" class="py-name" href="#" onclick="return doclink('link-15', 'aya', 'link-15');">aya</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-16" class="py-name" targets="Class quran.models.Aya=quran.models.Aya-class.html"><a title="quran.models.Aya" class="py-name" href="#" onclick="return doclink('link-16', 'Aya', 'link-16');">Aya</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-17', 'sura', 'link-3');">sura</a></tt><tt class="py-op">=</tt><tt id="link-18" class="py-name"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-18', 'sura', 'link-3');">sura</a></tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name"><a title="quran.models.Aya.number
+quran.models.Sura.number
+quran.models.Word.number" class="py-name" href="#" onclick="return doclink('link-19', 'number', 'link-5');">number</a></tt><tt class="py-op">=</tt><tt class="py-name">aya_number</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">words</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="quran.models.TranslatedAya.aya
+quran.models.Word.aya
+quran.views.aya" class="py-name" href="#" onclick="return doclink('link-20', 'aya', 'link-15');">aya</a></tt><tt class="py-op">.</tt><tt class="py-name">words</tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt id="link-21" class="py-name"><a title="quran.models.Sura" class="py-name" href="#" onclick="return doclink('link-21', 'Sura', 'link-2');">Sura</a></tt><tt class="py-op">.</tt><tt class="py-name">DoesNotExist</tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name"><a title="quran.models.Aya" class="py-name" href="#" onclick="return doclink('link-22', 'Aya', 'link-16');">Aya</a></tt><tt class="py-op">.</tt><tt class="py-name">DoesNotExist</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Http404</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-name">template_name</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'sura'</tt><tt class="py-op">:</tt> <tt id="link-23" class="py-name"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-23', 'sura', 'link-3');">sura</a></tt><tt class="py-op">,</tt> <tt class="py-string">'aya'</tt><tt class="py-op">:</tt> <tt id="link-24" class="py-name"><a title="quran.models.TranslatedAya.aya
+quran.models.Word.aya
+quran.views.aya" class="py-name" href="#" onclick="return doclink('link-24', 'aya', 'link-15');">aya</a></tt><tt class="py-op">,</tt> <tt class="py-string">'words'</tt><tt class="py-op">:</tt> <tt class="py-name">words</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="word"></a><div id="word-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="word-toggle" onclick="return toggle('word');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="quran.views-module.html#word">word</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">sura_number</tt><tt class="py-op">,</tt> <tt class="py-param">aya_number</tt><tt class="py-op">,</tt> <tt class="py-param">word_number</tt><tt class="py-op">,</tt> <tt class="py-param">template_name</tt><tt class="py-op">=</tt><tt class="py-string">'quran/word.html'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="word-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="word-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt id="link-25" class="py-name"><a title="quran.models.TranslatedAya.aya
+quran.models.Word.aya
+quran.views.aya" class="py-name" href="#" onclick="return doclink('link-25', 'aya', 'link-15');">aya</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="quran.models.Aya" class="py-name" href="#" onclick="return doclink('link-26', 'Aya', 'link-16');">Aya</a></tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name"><a title="quran.models.Aya.sura
+quran.models.TranslatedAya.sura
+quran.models.Word.sura
+quran.views.sura" class="py-name" href="#" onclick="return doclink('link-27', 'sura', 'link-3');">sura</a></tt><tt class="py-op">=</tt><tt class="py-name">sura_number</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name"><a title="quran.models.Aya.number
+quran.models.Sura.number
+quran.models.Word.number" class="py-name" href="#" onclick="return doclink('link-28', 'number', 'link-5');">number</a></tt><tt class="py-op">=</tt><tt class="py-name">aya_number</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt id="link-29" class="py-name" targets="Function quran.views.word()=quran.views-module.html#word"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-29', 'word', 'link-29');">word</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name" targets="Class quran.models.Word=quran.models.Word-class.html"><a title="quran.models.Word" class="py-name" href="#" onclick="return doclink('link-30', 'Word', 'link-30');">Word</a></tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name"><a title="quran.models.TranslatedAya.aya
+quran.models.Word.aya
+quran.views.aya" class="py-name" href="#" onclick="return doclink('link-31', 'aya', 'link-15');">aya</a></tt><tt class="py-op">=</tt><tt id="link-32" class="py-name"><a title="quran.models.TranslatedAya.aya
+quran.models.Word.aya
+quran.views.aya" class="py-name" href="#" onclick="return doclink('link-32', 'aya', 'link-15');">aya</a></tt><tt class="py-op">,</tt> <tt id="link-33" class="py-name"><a title="quran.models.Aya.number
+quran.models.Sura.number
+quran.models.Word.number" class="py-name" href="#" onclick="return doclink('link-33', 'number', 'link-5');">number</a></tt><tt class="py-op">=</tt><tt class="py-name">word_number</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt id="link-34" class="py-name" targets="Variable quran.models.DistinctWord.root=quran.models.DistinctWord-class.html#root,Variable quran.models.Word.root=quran.models.Word-class.html#root,Function quran.views.root()=quran.views-module.html#root"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-34', 'root', 'link-34');">root</a></tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-35', 'word', 'link-29');">word</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-36', 'root', 'link-34');">root</a></tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-name">template_name</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'word'</tt><tt class="py-op">:</tt> <tt id="link-37" class="py-name"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-37', 'word', 'link-29');">word</a></tt><tt class="py-op">,</tt> <tt class="py-string">'aya'</tt><tt class="py-op">:</tt> <tt id="link-38" class="py-name"><a title="quran.models.TranslatedAya.aya
+quran.models.Word.aya
+quran.views.aya" class="py-name" href="#" onclick="return doclink('link-38', 'aya', 'link-15');">aya</a></tt><tt class="py-op">,</tt> <tt class="py-string">'root'</tt><tt class="py-op">:</tt> <tt id="link-39" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-39', 'root', 'link-34');">root</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="distinct_word"></a><div id="distinct_word-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="distinct_word-toggle" onclick="return toggle('distinct_word');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="quran.views-module.html#distinct_word">distinct_word</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">distinct_word_id</tt><tt class="py-op">,</tt> <tt class="py-param">template_name</tt><tt class="py-op">=</tt><tt class="py-string">'quran/distinct_word.html'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="distinct_word-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="distinct_word-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt id="link-40" class="py-name"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-40', 'word', 'link-29');">word</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-41" class="py-name" targets="Class quran.models.DistinctWord=quran.models.DistinctWord-class.html"><a title="quran.models.DistinctWord" class="py-name" href="#" onclick="return doclink('link-41', 'DistinctWord', 'link-41');">DistinctWord</a></tt><tt class="py-op">,</tt> <tt class="py-name">pk</tt><tt class="py-op">=</tt><tt class="py-name">distinct_word_id</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt id="link-42" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-42', 'root', 'link-34');">root</a></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-43', 'word', 'link-29');">word</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-44', 'root', 'link-34');">root</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-name">words</tt> <tt class="py-op">=</tt> <tt id="link-45" class="py-name"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-45', 'word', 'link-29');">word</a></tt><tt class="py-op">.</tt><tt class="py-name">word_set</tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt id="link-46" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-46', 'ayas', 'link-6');">ayas</a></tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-47', 'word', 'link-29');">word</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-48', 'ayas', 'link-6');">ayas</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Variable quran.models.Word.distinct=quran.models.Word-class.html#distinct"><a title="quran.models.Word.distinct" class="py-name" href="#" onclick="return doclink('link-49', 'distinct', 'link-49');">distinct</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-name">template_name</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'word'</tt><tt class="py-op">:</tt> <tt id="link-50" class="py-name"><a title="quran.views.word" class="py-name" href="#" onclick="return doclink('link-50', 'word', 'link-29');">word</a></tt><tt class="py-op">,</tt> <tt class="py-string">'root'</tt><tt class="py-op">:</tt> <tt id="link-51" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-51', 'root', 'link-34');">root</a></tt><tt class="py-op">,</tt> <tt class="py-string">'words'</tt><tt class="py-op">:</tt> <tt class="py-name">words</tt><tt class="py-op">,</tt> <tt class="py-string">'ayas'</tt><tt class="py-op">:</tt> <tt id="link-52" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-52', 'ayas', 'link-6');">ayas</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="root"></a><div id="root-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="root-toggle" onclick="return toggle('root');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="quran.views-module.html#root">root</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">root_id</tt><tt class="py-op">,</tt> <tt class="py-param">template_name</tt><tt class="py-op">=</tt><tt class="py-string">'quran/root.html'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="root-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="root-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt id="link-53" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-53', 'root', 'link-34');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-54" class="py-name" targets="Class quran.models.Root=quran.models.Root-class.html"><a title="quran.models.Root" class="py-name" href="#" onclick="return doclink('link-54', 'Root', 'link-54');">Root</a></tt><tt class="py-op">,</tt> <tt class="py-name">pk</tt><tt class="py-op">=</tt><tt class="py-name">root_id</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-name">words</tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-55', 'root', 'link-34');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">words</tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt id="link-56" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-56', 'ayas', 'link-6');">ayas</a></tt> <tt class="py-op">=</tt> <tt id="link-57" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-57', 'root', 'link-34');">root</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-58', 'ayas', 'link-6');">ayas</a></tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="quran.models.Word.distinct" class="py-name" href="#" onclick="return doclink('link-59', 'distinct', 'link-49');">distinct</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">render_to_response</tt><tt class="py-op">(</tt><tt class="py-name">template_name</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'root'</tt><tt class="py-op">:</tt> <tt id="link-60" class="py-name"><a title="quran.models.DistinctWord.root
+quran.models.Word.root
+quran.views.root" class="py-name" href="#" onclick="return doclink('link-60', 'root', 'link-34');">root</a></tt><tt class="py-op">,</tt> <tt class="py-string">'words'</tt><tt class="py-op">:</tt> <tt class="py-name">words</tt><tt class="py-op">,</tt> <tt class="py-string">'ayas'</tt><tt class="py-op">:</tt> <tt id="link-61" class="py-name"><a title="quran.models.DistinctWord.ayas
+quran.models.Root.ayas" class="py-name" href="#" onclick="return doclink('link-61', 'ayas', 'link-6');">ayas</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Dec  5 20:21:09 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
