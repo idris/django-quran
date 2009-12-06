@@ -1,9 +1,23 @@
-{{ word }}
+{{ word.token }}
 <hr>
-Root: <a href="/quran/root/{{ root.pk }}/">{{ root }}</a>
+Root: 
+{% if root %}
+    <a href="/quran/root/{{ root.pk }}/">{{ root.letters }}</a>
+{% else %}
+    Unknown
+{% endif %}
 <hr>
 <ul>
     {% for w in words %}
-    <li><a href="/quran/{{ w.aya.sura_id }}/{{ w.aya.number }}/{{ w.number }}/">{{ w }}</a></li>
+    <li>
+        <a href="/quran/{{ w.aya.sura_id }}/{{ w.aya.number }}/{{ w.number }}/">{{ w.token }}</a>
+        <div>{{ w.aya.sura_id }}:{{ w.aya.number }}. <span class="aya">{{ w.aya.text }}</span></div>
+    </li>
     {% endfor %}
 </ul>
+
+{% comment %}
+{% for aya in ayas.distinct %}
+<div>{{ aya.sura_id }}:{{ aya.number }}. <span class="aya">{{ aya.text }}</span></div>
+{% endfor %}
+{% endcomment %}

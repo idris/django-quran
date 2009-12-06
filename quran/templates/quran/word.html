@@ -1,3 +1,11 @@
 {{ word.token }}
 <hr>
-Root: <a href="/quran/root/{{ root.pk }}/">{{ root }}</a>
+Root: 
+{% if root %}
+<a href="/quran/root/{{ root.pk }}/">{{ root }}</a>
+{% else %}
+Unknown
+{% endif %}
+<hr>
+
+<div>{{ aya.sura_id }}:{{ aya.number }}. <span class="aya">{{ aya.text }}</span></div>

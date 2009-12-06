@@ -1,6 +1,12 @@
 {{ root.letters }}
 <hr>
-{% for word in words %}
-<a href="/quran/word/{{ word.pk }}/">{{ word }}</a>
-<br>
-{% endfor %}
+<ul>
+    {% for word in words %}
+    <li>
+        <a href="/quran/word/{{ word.pk }}/">{{ word.token }}</a>
+        {% for aya in word.ayas.distinct %}
+        <div>{{ aya.sura_id }}:{{ aya.number }}. <span class="aya">{{ aya.text }}</span></div>
+        {% endfor %}
+    </li>
+    {% endfor %}
+</ul>

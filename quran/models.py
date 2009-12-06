@@ -78,6 +78,7 @@ class Root(models.Model):
     """Root word"""
 
     letters = models.CharField(max_length=10, unique=True, db_index=True) # to my knowledge, there is no root with more than 7 letters
+    ayas = models.ManyToManyField(Aya, through='Word')
 
     def __str__(self):
         return unicode_to_buckwalter(self.letters)
@@ -90,6 +91,7 @@ class DistinctWord(models.Model):
     """Distinct Arabic word in the Quran"""
     token = models.CharField(max_length=50, unique=True, db_index=True)
     root = models.ForeignKey(Root, null=True, related_name='words', db_index=True)
+    ayas = models.ManyToManyField(Aya, through='Word')
 
     class Meta:
         ordering = ['token']
