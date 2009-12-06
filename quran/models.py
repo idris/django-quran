@@ -105,6 +105,7 @@ class DistinctWord(models.Model):
 class Word(models.Model):
     """Arabic word in the Quran"""
 
+    sura = models.ForeignKey(Sura, related_name='words', db_index=True)
     aya = models.ForeignKey(Aya, related_name='words', db_index=True)
     number = models.IntegerField()
     token = models.CharField(max_length=50, db_index=True)

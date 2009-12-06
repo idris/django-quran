@@ -125,7 +125,7 @@ def import_morphology_xml():
                     distinct_word = DistinctWord(token=dtoken, root=root)
                     distinct_word.save()
 
-                word = Word(aya=aya, number=number, token=token, root=root, distinct=distinct_word)
+                word = Word(sura=sura, aya=aya, number=number, token=token, root=root, distinct=distinct_word)
                 word.save()
 
             print "[morphology] %d:%d" % (sura.number, aya.number)
@@ -150,8 +150,9 @@ def import_morphology_txt():
         token = parts[3]
         morphology = parts[4]
 
-        if aya_number is not aya.number or sura_number is not sura.number:
-            sura = Sura.objects.get(number=sura_number)
+        if aya_number is not aya.number:
+            if sura_number is not sura.number:
+                sura = Sura.objects.get(number=sura_number)
             aya = Aya.objects.get(sura=sura, number=aya_number)
             print "[morphology] %d:%d" % (sura.number, aya.number)
 
@@ -167,7 +168,7 @@ def import_morphology_txt():
             distinct_word = DistinctWord(token=dtoken, root=root)
             distinct_word.save()
 
-        word = Word(aya=aya, number=word_number, token=token, root=root, distinct=distinct_word)
+        word = Word(sura=sura, aya=aya, number=word_number, token=token, root=root, distinct=distinct_word)
         word.save()
 
         line = f.readline()
