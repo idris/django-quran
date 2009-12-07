@@ -28,15 +28,15 @@ def word(request, sura_number, aya_number, word_number, template_name='quran/wor
     root = word.root
     return render_to_response(template_name, {'word': word, 'aya': aya, 'root': root})
 
-def distinct_word(request, distinct_word_id, template_name='quran/distinct_word.html'):
-    word = get_object_or_404(DistinctWord, pk=distinct_word_id)
-    root = word.root
-    words = word.word_set.all()
-    ayas = word.ayas.distinct()
-    return render_to_response(template_name, {'word': word, 'root': root, 'words': words, 'ayas': ayas})
+def lemma(request, lemma_id, template_name='quran/lemma.html'):
+    lemma = get_object_or_404(Lemma, pk=lemma_id)
+    root = lemma.root
+    words = lemma.word_set.all()
+    ayas = lemma.ayas.distinct()
+    return render_to_response(template_name, {'lemma': lemma, 'root': root, 'words': words, 'ayas': ayas})
 
 def root(request, root_id, template_name='quran/root.html'):
     root = get_object_or_404(Root, pk=root_id)
-    words = root.words.all()
+    lemmas = root.lemmas.all()
     ayas = root.ayas.distinct()
-    return render_to_response(template_name, {'root': root, 'words': words, 'ayas': ayas})
+    return render_to_response(template_name, {'root': root, 'lemmas': lemmas, 'ayas': ayas})

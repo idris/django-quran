@@ -113,19 +113,19 @@ def import_morphology_xml():
                 token = w.getAttribute('token')
                 morphology = w.getAttribute('morphology')
 
-                distinct_word = None
+                lemma = None
                 dtoken = token
                 root = extract_root(morphology)
                 lem = extract_lem(morphology)
                 if lem: dtoken = lem
 
                 try:
-                    distinct_word = DistinctWord.objects.get(token=dtoken)
-                except DistinctWord.DoesNotExist:
-                    distinct_word = DistinctWord(token=dtoken, root=root)
-                    distinct_word.save()
+                    lemma = Lemma.objects.get(token=dtoken)
+                except Lemma.DoesNotExist:
+                    lemma = Lemma(token=dtoken, root=root)
+                    lemma.save()
 
-                word = Word(sura=sura, aya=aya, number=number, token=token, root=root, distinct=distinct_word)
+                word = Word(sura=sura, aya=aya, number=number, token=token, root=root, lemma=lemma)
                 word.save()
 
             print "[morphology] %d:%d" % (sura.number, aya.number)
@@ -156,19 +156,19 @@ def import_morphology_txt():
             aya = Aya.objects.get(sura=sura, number=aya_number)
             print "[morphology] %d:%d" % (sura.number, aya.number)
 
-        distinct_word = None
+        lemma = None
         dtoken = token
         root = extract_root(morphology)
         lem = extract_lem(morphology)
         if lem: dtoken = lem
 
         try:
-            distinct_word = DistinctWord.objects.get(token=dtoken)
-        except DistinctWord.DoesNotExist:
-            distinct_word = DistinctWord(token=dtoken, root=root)
-            distinct_word.save()
+            lemma = Lemma.objects.get(token=dtoken)
+        except Lemma.DoesNotExist:
+            lemma = Lemma(token=dtoken, root=root)
+            lemma.save()
 
-        word = Word(sura=sura, aya=aya, number=word_number, token=token, root=root, distinct=distinct_word)
+        word = Word(sura=sura, aya=aya, number=word_number, token=token, root=root, lemma=lemma)
         word.save()
 
         line = f.readline()

@@ -87,10 +87,10 @@ class Root(models.Model):
         return ' '.join(self.letters)
 
 
-class DistinctWord(models.Model):
-    """Distinct Arabic word in the Quran"""
+class Lemma(models.Model):
+    """Distinct Arabic word (lemma) in the Quran"""
     token = models.CharField(max_length=50, unique=True, db_index=True)
-    root = models.ForeignKey(Root, null=True, related_name='words', db_index=True)
+    root = models.ForeignKey(Root, null=True, related_name='lemmas', db_index=True)
     ayas = models.ManyToManyField(Aya, through='Word')
 
     class Meta:
@@ -109,8 +109,8 @@ class Word(models.Model):
     aya = models.ForeignKey(Aya, related_name='words', db_index=True)
     number = models.IntegerField()
     token = models.CharField(max_length=50, db_index=True)
-    root = models.ForeignKey(Root, null=True, related_name='all_words', db_index=True)
-    distinct = models.ForeignKey(DistinctWord, db_index=True)
+    root = models.ForeignKey(Root, null=True, related_name='words', db_index=True)
+    lemma = models.ForeignKey(Lemma, db_index=True)
 
     class Meta:
         unique_together = (('aya', 'number'))

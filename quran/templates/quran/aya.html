@@ -1,3 +1,3 @@
 {% for word in words %}
-<a href="/quran/word/{{ word.pk }}">{{ word.token }}</a> 
+<a href="/quran/{{ sura.number }}/{{ aya.number }}/{{ word.number }}/">{{ word.token }}</a> 
 {% endfor %}
