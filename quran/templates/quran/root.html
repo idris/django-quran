@@ -3,7 +3,7 @@
 <ul>
     {% for lemma in lemmas %}
     <li>
-        <a href="/quran/lemma/{{ lemma.pk }}/">{{ word.token }}</a>
+        <a href="/quran/lemma/{{ lemma.pk }}/">{{ lemma.token }}</a>
         {% for aya in lemma.ayas.distinct %}
         <div>{{ aya.sura_id }}:{{ aya.number }}. <span class="aya">{{ aya.text }}</span></div>
         {% endfor %}

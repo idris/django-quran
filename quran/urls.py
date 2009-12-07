@@ -8,4 +8,5 @@ urlpatterns = patterns('quran.views',
 
     (r'^lemma/(?P<lemma_id>\d+)/$', 'lemma'),
     (r'^root/(?P<root_id>\d+)/$', 'root'),
+    (r'^root/$', 'root_index'),
 )

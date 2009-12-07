@@ -1,8 +1,8 @@
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_list_or_404, get_object_or_404, render_to_response
 from quran.models import *
 
 def index(request, template_name='quran/index.html'):
-    suras = Sura.objects.all()
+    suras = get_list_or_404(Sura)
     return render_to_response(template_name, {'suras': suras})
 
 def sura(request, sura_number, template_name='quran/sura.html'):
@@ -40,3 +40,7 @@ def root(request, root_id, template_name='quran/root.html'):
     lemmas = root.lemmas.all()
     ayas = root.ayas.distinct()
     return render_to_response(template_name, {'root': root, 'lemmas': lemmas, 'ayas': ayas})
+
+def root_index(request, template_name='quran/root_index.html'):
+    roots = Root.objects.all().order_by('letters')
+    return render_to_response(template_name, {'roots': roots})
