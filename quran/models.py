@@ -84,7 +84,7 @@ class Root(models.Model):
         return unicode_to_buckwalter(self.letters)
 
     def __unicode__(self):
-        return self.letters
+        return ' '.join(self.letters)
 
 
 class DistinctWord(models.Model):
