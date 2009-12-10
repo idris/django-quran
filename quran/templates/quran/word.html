@@ -2,7 +2,7 @@
 <hr>
 Root: 
 {% if root %}
-<a href="/quran/root/{{ root.pk }}/">{{ root }}</a>
+<a href="{{ root.get_absolute_url }}">{{ root }}</a>
 {% else %}
 Unknown
 {% endif %}

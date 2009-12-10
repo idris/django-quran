@@ -1,5 +1,5 @@
 <ol>
     {% for sura in suras %}
-    <li><a href="{{ sura.number }}/">{{ sura.name }}</a></li>
+    <li><a href="{{ sura.get_absolute_url }}">{{ sura.name }}</a></li>
     {% endfor %}
 </ol>

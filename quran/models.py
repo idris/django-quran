@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 
 from quran.buckwalter import *
 
@@ -23,6 +24,10 @@ class Sura(models.Model):
     class Meta:
         ordering = ['number']
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('quran_sura', [str(self.number)])
+
     def __str__(self):
         return self.tname
 
@@ -40,6 +45,13 @@ class Aya(models.Model):
     class Meta:
         unique_together = (('number', 'sura'))
         ordering = ['sura', 'number']
+
+    def end_marker(self):
+        return mark_safe('&#64831;&#1633;&#64830;')
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('quran_aya', [str(self.sura_id), str(self.number)])
 
     def __str__(self):
         return unicode_to_buckwalter(self.text)
@@ -80,6 +92,10 @@ class Root(models.Model):
     letters = models.CharField(max_length=10, unique=True, db_index=True) # to my knowledge, there is no root with more than 7 letters
     ayas = models.ManyToManyField(Aya, through='Word')
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('quran_root', [str(self.id)])
+
     def __str__(self):
         return unicode_to_buckwalter(self.letters)
 
@@ -95,6 +111,10 @@ class Lemma(models.Model):
 
     class Meta:
         ordering = ['token']
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('quran_lemma', [str(self.id)])
 
     def __str__(self):
         return unicode_to_buckwalter(self.token)
@@ -115,6 +135,10 @@ class Word(models.Model):
     class Meta:
         unique_together = (('aya', 'number'))
         ordering = ['number']
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('quran_word', [str(self.sura_id), str(self.aya.number), str(self.number)])
 
     def __str__(self):
         return unicode_to_buckwalter(self.token)

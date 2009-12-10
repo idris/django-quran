@@ -2,7 +2,7 @@
 <hr>
 Root: 
 {% if root %}
-    <a href="/quran/root/{{ root.pk }}/">{{ root }}</a>
+    <a href="{{ root.get_absolute_url }}">{{ root }}</a>
 {% else %}
     Unknown
 {% endif %}
@@ -10,7 +10,7 @@ Root:
 <ul>
     {% for w in words %}
     <li>
-        <a href="/quran/{{ w.aya.sura_id }}/{{ w.aya.number }}/{{ w.number }}/">{{ w.token }}</a>
+        <a href="{{ w.get_absolute_url }}">{{ w.token }}</a>
         <div>{{ w.aya.sura_id }}:{{ w.aya.number }}. <span class="aya">{{ w.aya.text }}</span></div>
     </li>
     {% endfor %}
