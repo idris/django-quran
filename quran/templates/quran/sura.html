@@ -1,7 +1,8 @@
 <ol>
-    {% for aya in ayas %}
+    {% for aya,translation in ayas %}
     <li id="aya-{{ sura.number }}-{{ aya.number }}" class="quran aya">
         <p class="aya">{{ aya.text }}</p>
+        <p class="translation">{{ translation.text }}</p>
     </li>
     {% endfor %}
 </ol>
