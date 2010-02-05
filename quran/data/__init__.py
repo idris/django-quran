@@ -98,7 +98,7 @@ def extract_root(morphology):
 
 
 def import_morphology_xml():
-    d = parse(path_to('corpus/quranic-corpus-morphology-0.1.xml'))
+    d = parse(path_to('corpus/quranic-corpus-morphology-0.2.xml'))
     suras = d.getElementsByTagName('chapter')
     for s in suras:
         sura_number = int(s.getAttribute('number'))
@@ -134,7 +134,7 @@ def import_morphology_xml():
 def import_morphology_txt():
     sura = Sura.objects.get(number=2)
     aya = Aya.objects.get(sura=sura, number=2) # any aya except the first.
-    f = open(path_to('corpus/quranic-corpus-morphology-0.1.1.txt'))
+    f = open(path_to('corpus/quranic-corpus-morphology-0.2.txt'))
 
     line = f.readline()
     while len(line) > 0:
