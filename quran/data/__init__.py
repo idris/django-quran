@@ -1,6 +1,7 @@
 import re
 import unittest
 from os import path
+import os
 from xml.dom.minidom import parse, parseString
 from django.db import transaction
 
@@ -58,17 +59,13 @@ def import_translation_txt(path, translation):
 
 
 def import_translations():
-    translation = QuranTranslation(name='Yusuf Ali', translator='Abdullah Yusuf Ali', source_name='Zekr.org', source_url='http://zekr.org/resources.html')
-    translation.save()
-    import_translation_txt(path_to('zekr/yusufali.txt'), translation)
+    translator_data = open(path_to('zekr/translator_data.txt'))
+    for line in translator_data.readlines():
+        name,translator,source_name,source_url,filename = line.strip().split(';')
 
-    translation = QuranTranslation(name='Shakir', translator='Mohammad Habib Shakir', source_name='Zekr.org', source_url='http://zekr.org/resources.html')
-    translation.save()
-    import_translation_txt(path_to('zekr/shakir.txt'), translation)
-
-    translation = QuranTranslation(name='Pickthall', translator='Mohammed Marmaduke William Pickthall', source_name='Zekr.org', source_url='http://zekr.org/resources.html')
-    translation.save()
-    import_translation_txt(path_to('zekr/pickthall.txt'), translation)
+        translation = QuranTranslation(name=name,translator=translator, source_name=source_name, source_url=source_url)
+        translation.save()
+        import_translation_txt(path_to('zekr/%s' % filename), translation)
 
 
 def extract_lem(morphology):
